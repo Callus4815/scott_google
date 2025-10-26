@@ -79,7 +79,10 @@ def extract_place_data(api_response: Dict[str, Any]) -> List[Dict[str, Any]]:
             "primaryType": place.get("primaryType", ""),
             "rating": place.get("rating", ""),
             "userRatingCount": place.get("userRatingCount", ""),
-            "businessStatus": place.get("businessStatus", "")
+            "businessStatus": place.get("businessStatus", ""),
+            "websiteUrl": place.get("websiteUri", ""),
+            "summary": place.get("generativeSummary", {}).get("overview", {}).get("text", ""),
+            "phoneNumber": place.get("nationalPhoneNumber", ""),
         }
         places_data.append(place_data)
     
@@ -225,7 +228,7 @@ def download_csv(session_id):
         # Create temporary CSV file
         temp_file = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.csv')
         
-        fieldnames = ["id", "displayName", "formattedAddress", "primaryType", "rating", "userRatingCount", "businessStatus"]
+        fieldnames = ["id", "displayName", "formattedAddress", "primaryType", "rating", "userRatingCount", "businessStatus", "websiteUrl", "summary", "phoneNumber"]
         
         with temp_file as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

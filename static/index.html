@@ -384,6 +384,9 @@
                              :class="place.businessStatus === 'OPERATIONAL' ? 'status-operational' : 'status-closed'">
                             {{ place.businessStatus }}
                         </div>
+                        <div v-if="place.summary" class="place-summary">{{ place.summary }}</div>
+                        <div v-if="place.websiteUrl" class="place-website"><a :href="place.websiteUrl" target="_blank">{{ place.websiteUrl }}</a></div>
+                        <div v-if="place.phoneNumber" class="place-phone">{{ place.phoneNumber }}</div>
                     </div>
                 </div>
             </div>
